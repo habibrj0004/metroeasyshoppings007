@@ -1,0 +1,57 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "metro": {
+      ".read": "auth != null",
+      "products": {
+        ".read": true,
+        ".write": "root.child('metro/users').child(auth.uid).child('role').val() === 'admin'"
+      },
+      "settings": {
+        ".read": true,
+        ".write": "root.child('metro/users').child(auth.uid).child('role').val() === 'admin'"
+      },
+      "stock": {
+        ".read": true,
+        ".write": "auth != null",
+        "$variant": {
+          ".validate": "newData.hasChildren(['h','r']) && newData.child('h').isNumber() && newData.child('r').isNumber() && newData.child('h').val() >= 0 && newData.child('r').val() >= 0 && newData.child('r').val() <= newData.child('h').val()"
+        }
+      },
+      "orders": {
+        ".indexOn": ["uid", "stage", "placedAt"],
+        ".write": "auth != null",
+        "$order": {
+          ".read": "auth != null && (data.child('uid').val() === auth.uid || root.child('metro/users').child(auth.uid).child('role').val() !== 'customer')",
+          ".validate": "newData.hasChildren(['id','placedAt','stage','cur','payment','totals']) && newData.child('stage').isString() && (newData.child('stage').val() === 'Awaiting confirmation' || newData.child('stage').val() === 'Confirmed' || newData.child('stage').val() === 'Picking' || newData.child('stage').val() === 'Packed' || newData.child('stage').val() === 'Ready for dispatch' || newData.child('stage').val() === 'Dispatched' || newData.child('stage').val() === 'Out for delivery' || newData.child('stage').val() === 'Delivered' || newData.child('stage').val() === 'Cancelled' || newData.child('stage').val() === 'Returned' || newData.child('stage').val() === 'Placed') && (newData.child('cur').val() === 'PKR' || newData.child('cur').val() === 'GBP') && newData.child('totals/total').isNumber() && newData.child('totals/total').val() >= 0"
+        }
+      },
+      "users": {
+        ".read": "auth != null && (auth.uid === 'admin-service' || root.child('metro/users').child(auth.uid).child('role').val() !== 'customer')",
+        "$uid": {
+          ".read": "auth != null && auth.uid === $uid",
+          ".write": "auth != null && (auth.uid === $uid || root.child('metro/users').child(auth.uid).child('role').val() === 'admin')",
+          "role": {
+            ".validate": "newData.val() === 'customer' || newData.val() === 'handler' || newData.val() === 'warehouse' || newData.val() === 'admin'",
+            ".write": "root.child('metro/users').child(auth.uid).child('role').val() === 'admin' || (!data.exists() && newData.val() === 'customer')"
+          },
+          "email": { ".validate": "newData.isString() && newData.val().matches(/^[^@ ]+@[^@ ]+\\.[^@ ]{2,}$/)" }
+        }
+      },
+      "fire": {
+        ".read": "root.child('metro/users').child(auth.uid).child('role').val() !== 'customer'",
+        ".write": "root.child('metro/users').child(auth.uid).child('role').val() !== 'customer'"
+      },
+      "msgs": {
+        ".read": "root.child('metro/users').child(auth.uid).child('role').val() !== 'customer'",
+        ".write": "auth != null"
+      },
+      "logs": {
+        ".read": "root.child('metro/users').child(auth.uid).child('role').val() === 'admin'",
+        ".write": "auth != null"
+      },
+      "seq": { ".write": "auth != null", ".validate": "newData.isNumber()" }
+    }
+  }
+}
