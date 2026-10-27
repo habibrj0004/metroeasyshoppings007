@@ -21,6 +21,10 @@ Open the folder in VS Code, right-click `index.html` and choose **Open with Live
 
 Test cards: `4242 4242 4242 4242` accepted, `4000 0000 0000 0002` declined. Promo codes: `WELCOME10`, `FLAT500`.
 
+## What's new in 2.7.0
+- New shadcn/ui style foundation (see the end of `styles.css`): neutral dark theme, pill buttons, filled inputs, soft cards, switch, progress bars, breadcrumb, dialog close button, alerts with icons, sidebar section labels, small-caps KPI tiles.
+- Bottom navigation on phones: all five tabs are now the same width, so the active pill and focus ring look the same on every tab, including Contact and Sign in.
+
 ## What's new in 2.6.0
 - Buttons follow the shadcn/ui Button variants (default, outline, secondary, destructive, ghost, link; sizes sm, lg, icon) and every button, link and field shares one focus ring. See the top of `styles.css`.
 - Emoji icons are replaced by Lucide icons (`icons.js`). The WhatsApp logo is on the home screen (hero button and floating button) and on every WhatsApp button.
