@@ -7,5 +7,5 @@ window.METRO_CONFIG = {
   shopWhatsApp: '923001234567',          // international format, no plus sign
   shopEmail: 'orders@metroshoes.example',
   notifyEndpoint: null,                   // optional serverless sender; not used in this simple version
-  version: '2.5.0'
+  version: '2.6.0'
 };

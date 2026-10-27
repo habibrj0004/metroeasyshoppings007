@@ -90,5 +90,12 @@
       f4: { id: 'f4', zone: 'Stockroom A (shoes)', item: 'Emergency exit route', status: 'Pass', by: 'Maryam Raza', t: now - 1 * D, note: 'Clear and lit' }
     };
   }
-  window.MetroData = { art, seed, SIZES };
+  /* Real product photos. One entry per product id; a product with no entry (or a photo that fails to load)
+     falls back to the drawn artwork above, so the shop never shows a broken image. */
+  const TAGS = { heel: 'highheels,shoes', flat: 'flats,shoes', sandal: 'sandals,shoes', sneaker: 'sneakers,shoes', boot: 'boots,shoes', tote: 'handbag,tote', clutch: 'clutch,handbag', cross: 'handbag,leather', belt: 'belt,leather', scarf: 'scarf,silk', wallet: 'wallet,leather', shades: 'sunglasses,fashion' };
+  /* Live stock photos matched by keyword (loremflickr.com serves real Flickr photos; ?lock keeps each product on the same picture).
+     To use your own photos instead, put the files next to index.html and set e.g.  MetroData.photos.p01 = 'p01.jpg'  */
+  const photos = {};
+  P.forEach((row, i) => { photos[row[0]] = 'https://loremflickr.com/640/495/' + TAGS[row[6]] + '/all?lock=' + (100 + i); });
+  window.MetroData = { art, seed, SIZES, photos, fb: {} };
 })();

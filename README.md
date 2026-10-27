@@ -21,9 +21,15 @@ Open the folder in VS Code, right-click `index.html` and choose **Open with Live
 
 Test cards: `4242 4242 4242 4242` accepted, `4000 0000 0000 0002` declined. Promo codes: `WELCOME10`, `FLAT500`.
 
+## What's new in 2.6.0
+- Buttons follow the shadcn/ui Button variants (default, outline, secondary, destructive, ghost, link; sizes sm, lg, icon) and every button, link and field shares one focus ring. See the top of `styles.css`.
+- Emoji icons are replaced by Lucide icons (`icons.js`). The WhatsApp logo is on the home screen (hero button and floating button) and on every WhatsApp button.
+- Empty spaces have placeholders: hints inside input boxes, and "nothing here yet" panels for empty lists, tables and charts in the customer, staff and admin screens.
+- Products use real photos (set in `data.js`, `MetroData.photos`). If a photo cannot load, the drawn artwork is shown instead.
+
 ## Files
 - `index.html`, `404.html`, `styles.css`, `manifest.webmanifest`, `sw.js`, `robots.txt`: the site and its app settings
-- `config.js`, `logic.js`, `data.js`, `db.js`, `app.js`, `dash.js`: application code (`config.js` holds the optional Firebase settings)
+- `config.js`, `icons.js`, `logic.js`, `data.js`, `db.js`, `app.js`, `dash.js`: application code (`config.js` holds the optional Firebase settings)
 - `logo.svg`, `icon-*.png`, `apple-touch-icon.png`, `og-image.png`: images
 - `database.rules.json`, `schema.sql`, `results.sql`, `FIREBASE_SETUP.md`: Firebase rules and the SQL model
 - `vercel.json`: Vercel headers (no build)
